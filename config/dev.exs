@@ -3,9 +3,9 @@ use Mix.Config
 # Configure your database
 config :vteach_phx, VteachPhx.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "vteach",
   database: "vteach_phx_dev",
-  hostname: "localhost",
+  hostname: "172.17.0.2",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
