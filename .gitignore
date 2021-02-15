@@ -32,3 +32,6 @@ vteach_phx-*.tar
 
 # Ignore IVS Code folder
 .code
+
+# Ignore notes
+*.notes

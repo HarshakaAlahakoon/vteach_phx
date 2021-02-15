@@ -7,6 +7,13 @@ defmodule VteachPhxWeb.Router do
 
   scope "/api", VteachPhxWeb do
     pipe_through :api
+
+    # resources "/users", UserController, except: [:new, :edit]
+
+    get "/users/index", UserController, :index
+    get "/users/:id", UserController, :show
+    post "/users/create", UserController, :create
+
   end
 
   # Enables LiveDashboard only for development

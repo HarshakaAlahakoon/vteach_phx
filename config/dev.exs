@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :vteach_phx, VteachPhx.Repo,
-  username: "postgres",
-  password: "vteach",
+  username: "harshaka",
+  password: "",
   database: "vteach_phx_dev",
-  hostname: "172.17.0.2",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
