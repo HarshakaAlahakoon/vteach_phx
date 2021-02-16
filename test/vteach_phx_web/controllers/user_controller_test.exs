@@ -39,7 +39,6 @@ defmodule VteachPhxWeb.UserControllerTest do
 
       assert %{
                "id" => id,
-               "password" => "some password",
                "email" => "some email"
              } = json_response(conn, 200)["data"]
     end
@@ -61,7 +60,6 @@ defmodule VteachPhxWeb.UserControllerTest do
 
       assert %{
                "id" => id,
-               "password" => "some updated password",
                "email" => "some updated email"
              } = json_response(conn, 200)["data"]
     end

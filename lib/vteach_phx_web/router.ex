@@ -9,10 +9,18 @@ defmodule VteachPhxWeb.Router do
     pipe_through :api
 
     # resources "/users", UserController, except: [:new, :edit]
-
     get "/users/index", UserController, :index
     get "/users/:id", UserController, :show
     post "/users/create", UserController, :create
+    put "/users/update/:id", UserController, :update
+    delete "/users/delete/:id", UserController, :delete
+
+    # resources "/institutes", InstituteController, except: [:new, :edit]
+    get "/institutes/index", InstituteController, :index
+    get "/institutes/:id", InstituteController, :show
+    post "/institutes/create", InstituteController, :create
+    put "/institutes/update/:id", InstituteController, :update
+    delete "/institutes/delete/:id", InstituteController, :delete
 
   end
 
