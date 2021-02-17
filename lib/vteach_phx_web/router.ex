@@ -8,6 +8,8 @@ defmodule VteachPhxWeb.Router do
   scope "/api", VteachPhxWeb do
     pipe_through :api
 
+    post "/auth/signin", AuthController, :sign_in
+
     # resources "/users", UserController, except: [:new, :edit]
     get "/users/index", UserController, :index
     get "/users/:id", UserController, :show

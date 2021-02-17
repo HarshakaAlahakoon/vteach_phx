@@ -5,7 +5,6 @@ defmodule VteachPhx.Accounts do
 
   import Ecto.Query, warn: false
   alias VteachPhx.Repo
-
   alias VteachPhx.Accounts.User
 
   @doc """
@@ -36,6 +35,11 @@ defmodule VteachPhx.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def get_user_by_email(email) do
+    User
+    |> Repo.get_by!(email: email)
+  end
 
   @doc """
   Creates a user.
