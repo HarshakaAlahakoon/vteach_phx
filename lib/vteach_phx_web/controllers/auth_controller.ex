@@ -25,9 +25,9 @@ defmodule VteachPhxWeb.AuthController do
     # resp = %{:succes => true, :error_message => "SUCCES"}
 
     case Session.authenticate(user_params) do
-      {:ok, _} ->
-        resp = %{:succes => true, :error_message => "SUCCES"}
-        conn |> render("sign_in_succes.json", response: resp)
+      {:ok, token} ->
+        resp = %{:succes => true, :error_message => "SUCCESS", :token => token}
+        conn |> render("sign_in_jwt.json", response: resp)
       _ ->
         resp = %{:succes => false, :error_message => "ERROR"}
         conn |> render("sign_in_succes.json", response: resp)

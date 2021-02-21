@@ -38,7 +38,7 @@ defmodule VteachPhx.Accounts do
 
   def get_user_by_email(email) do
     User
-    |> Repo.get_by!(email: email)
+    |> Repo.get_by(email: email)
   end
 
   @doc """

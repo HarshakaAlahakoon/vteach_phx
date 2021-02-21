@@ -16,13 +16,11 @@ defmodule VteachPhxWeb.AuthView do
       password: auth.password}
   end
 
-  # def render("login_succes.json", %{auth: auth}) do
-  def render("sign_in_succes.json", %{response: resp}) do
+  def render("sign_in_jwt.json", %{response: resp}) do
     %{
-      # id: auth.id,
-      # email: auth.email
       succes: resp.succes,
-      error_message: resp.error_message
+      error_message: resp.error_message,
+      token: resp.token
     }
   end
 end
