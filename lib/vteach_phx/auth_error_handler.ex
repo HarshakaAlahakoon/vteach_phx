@@ -1,0 +1,9 @@
+defmodule VteachPhx.AuthErrorHandler do
+  import Plug.Conn
+
+  def auth_error(conn, {type, reason}, _opts) do
+    IO.inspect(reason, label: "\n#{__MODULE__} :: auth_error >> reason\n")
+    body = Jason.encode!(%{error: to_string(type)})
+    send_resp(conn, 401, body)
+  end
+end

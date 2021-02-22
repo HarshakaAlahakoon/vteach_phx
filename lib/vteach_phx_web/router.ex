@@ -5,10 +5,18 @@ defmodule VteachPhxWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :jwt_authentication do
+    plug VteachPhxWeb.AuthPipeline
+  end
+
   scope "/api", VteachPhxWeb do
     pipe_through :api
 
     post "/auth/signin", AuthController, :sign_in
+  end
+
+  scope "/api", VteachPhxWeb do
+    pipe_through [:api, :jwt_authentication]
 
     # resources "/users", UserController, except: [:new, :edit]
     get "/users/index", UserController, :index
