@@ -6,6 +6,8 @@ defmodule VteachPhxWeb.FallbackController do
   """
   use VteachPhxWeb, :controller
 
+  require Logger
+
   # This clause is an example of how to handle resources that cannot be found.
   def call(conn, {:error, :not_found}) do
     conn
@@ -22,7 +24,7 @@ defmodule VteachPhxWeb.FallbackController do
   end
 
   def call(conn, error) do
-    IO.inspect(error)
+    Logger.error("#{inspect(error)}")
     conn
     |> put_status(500)
     |> put_view(VteachPhxWeb.ErrorView)

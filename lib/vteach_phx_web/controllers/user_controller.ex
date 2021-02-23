@@ -1,13 +1,16 @@
 defmodule VteachPhxWeb.UserController do
+
   use VteachPhxWeb, :controller
 
   alias VteachPhx.Accounts
   alias VteachPhx.Accounts.User
   alias VteachPhxWeb.Plugs.RequireRole
 
+  require Logger
+
   action_fallback VteachPhxWeb.FallbackController
 
-  plug RequireRole, ["admin1"] when action in [:index, :show]
+  plug RequireRole, ["admin"] when action in [:index, :show]
 
   def index(conn, _params) do
     users = Accounts.list_users()

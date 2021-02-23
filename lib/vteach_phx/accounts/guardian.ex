@@ -1,7 +1,11 @@
 defmodule VteachPhx.Accounts.Guardian do
+
   use Guardian, otp_app: :vteach_phx
+
   alias VteachPhx.Accounts.User
   alias VteachPhx.Accounts
+
+  require Logger
 
   def subject_for_token(%User{:id => id}, _claims) do
     # You can use any value for the subject of your token but
@@ -14,7 +18,7 @@ defmodule VteachPhx.Accounts.Guardian do
   end
   def subject_for_token(input, _) do
     # TODO:
-    IO.inspect(input, label: "\n[ERROR] #{__MODULE__} :: subject_for_token (no match) >> sub\n")
+    Logger.error("Unknown input: #{inspect(input)}")
     {:error, :reason_for_error}
   end
 
@@ -27,7 +31,7 @@ defmodule VteachPhx.Accounts.Guardian do
   end
   def resource_from_claims(claims) do
     # TODO:
-    IO.inspect(claims, label: "\n[ERROR] #{__MODULE__} :: resource_from_claims (no match) >> claims\n")
+    Logger.error("Sub not found in: #{inspect(claims)}")
     {:error, :resource_not_found}
   end
 

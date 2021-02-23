@@ -20,9 +20,12 @@ config :vteach_phx, VteachPhxWeb.Endpoint,
   live_view: [signing_salt: "rilJWl8z"]
 
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+# config :logger, :console
+  # backends: [:console],
+  # format: "$time [$level] $metadata $message\n",
+  # metadata: :all
+  # metadata: [:module, :function, :line]
+  # format: {VteachPhxWeb.LogFormatter, :format}
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
