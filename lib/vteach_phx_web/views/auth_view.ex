@@ -23,4 +23,11 @@ defmodule VteachPhxWeb.AuthView do
       token: resp.token
     }
   end
+
+  def render("sign_in_failed.json", %{response: resp}) do
+    %{
+      succes: resp.succes,
+      error_message: resp.error_message
+    }
+  end
 end

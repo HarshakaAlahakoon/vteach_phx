@@ -10,12 +10,13 @@ defmodule VteachPhxWeb.AuthController do
     case Session.authenticate(user_params) do
       {:ok, user} ->
         {:ok, jwt, claims} = Guardian.encode_and_sign(user)
+        IO.inspect(Guardian.Plug.current_resource(conn), label: "\n#{__MODULE__} :: authenticate >> resource\n")
         IO.inspect(claims, label: "\n#{__MODULE__} :: authenticate >> claims\n")
         resp = %{:succes => true, :error_message => "SUCCESS", :token => jwt}
         conn |> render("sign_in_jwt.json", response: resp)
-      _ ->
+      _error ->
         resp = %{:succes => false, :error_message => "ERROR"}
-        conn |> render("sign_in_succes.json", response: resp)
+        conn |> render("sign_in_failed.json", response: resp)
     end
   end
 

@@ -7,8 +7,8 @@ defmodule VteachPhx.Accounts.Session do
       {:ok, user} <- check_password(user, password) do
         {:ok, user}
       else
-        _ ->
-          {:error, "Authentication failed"}
+        _error ->
+            {:error, "Authentication failed"}
       end
   end
 
@@ -17,7 +17,7 @@ defmodule VteachPhx.Accounts.Session do
       nil ->
         Argon2.no_user_verify()
       _ ->
-        Argon2.check_pass(user, password, [hash_key: :password])
+        Argon2.check_pass(user, password, [hash_key: :password_hash])
     end
   end
 
