@@ -16,7 +16,8 @@ defmodule VteachPhxWeb.FallbackController do
     |> render(:"404")
   end
 
-  def call(conn, {:error, _error_content}) do
+  def call(conn, {:error, error_content}) do
+    Logger.error("#{inspect(error_content)}")
     conn
     |> put_status(422)
     |> put_view(VteachPhxWeb.ErrorView)

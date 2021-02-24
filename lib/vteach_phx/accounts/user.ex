@@ -6,10 +6,10 @@ defmodule VteachPhx.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
-    field :email, :string
-    field :password, :string, virtual: true
-    field :password_validate, :string, virtual: true
-    field :password_hash, :string
+    field :email, :string, unique: true
+    field :password, :string, virtual: true, redact: true
+    field :password_confirmation, :string, virtual: true, redact: true
+    field :password_hash, :string, redact: true
     field :role, :string
 
     timestamps()
@@ -18,11 +18,25 @@ defmodule VteachPhx.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password_hash, :role])
-    |> validate_required([:email, :password_hash])
+    |> cast(attrs, [:email, :password, :password_confirmation, :password_hash, :role])
+    |> validate_required([:email, :password, :password_confirmation, :role])
+    |> validate_format(:email, ~r/@/)
+    |> update_change(:email, &String.downcase(&1))
+    |> validate_length(:password, min: 3, max: 15)
+    |> validate_confirmation(:password)
+    |> unique_constraint(:email, name: :users_pkey)
+    |> hash_password
   end
 
-  def hash_password(password) do
-    Argon2.add_hash(password)
+  # def hash_password(password) do
+  #   Argon2.add_hash(password)
+  # end
+
+  def hash_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Argon2.add_hash(password))
   end
+  def hash_password(changeset) do
+    changeset
+  end
+
 end

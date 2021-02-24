@@ -18,13 +18,15 @@ defmodule VteachPhxWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with true <- user_params["password"] === user_params["password_validate"],
-      %{password_hash: password_hash} <- User.hash_password(user_params["password"]),
-      {:ok, %User{} = user} <- Accounts.create_user(Map.put(user_params, "password_hash", password_hash)) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.user_path(conn, :show, user))
       |> render("show.json", user: user)
+    else
+      {:error, %Ecto.Changeset{errors: errors}} ->
+        error_list = convert_changeset_errors(errors)
+        render(conn, "creation_failed.json", errors: error_list)
     end
   end
 
@@ -48,4 +50,17 @@ defmodule VteachPhxWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  # TODO: This function will be needed by other controllers/views, therefore, move this to a utility module.
+  defp convert_changeset_errors(errors) do
+    Enum.map(errors, fn {field, {message, values}} ->
+      message1 = List.foldl(values, message, fn (y, acc) ->
+        {key, value} = y
+          String.replace(acc, "%{#{key}}", "#{value}", global: true)
+        end
+      )
+     {field, message1}
+    end)
+  end
+
 end

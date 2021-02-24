@@ -13,6 +13,7 @@ defmodule VteachPhxWeb.Router do
     pipe_through :api
 
     post "/auth/signin", AuthController, :sign_in
+    # post "/users/create", UserController, :create
   end
 
   scope "/api", VteachPhxWeb do
