@@ -47,7 +47,12 @@ config :vteach_phx, VteachPhxWeb.Endpoint,
 # different ports.
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console,
+  # backends: [:console],
+  level: :debug,
+  metadata: :all,
+  # format: "[$level] $message\n"
+  format: {VteachPhxWeb.LogFormatter, :format}
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

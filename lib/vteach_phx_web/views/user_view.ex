@@ -14,8 +14,13 @@ defmodule VteachPhxWeb.UserView do
     %{
       id: user.id,
       email: user.email
-      # ,
-      # password: user.password
+    }
+  end
+
+  def render("creation_failed.json", %{errors: errors}) do
+    %{
+      succes: false,
+      errors: Enum.into(errors, %{})
     }
   end
 end
