@@ -7,6 +7,7 @@ defmodule VteachPhx.Accounts.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :email, :string, unique: true
+    field :username, :string
     field :password, :string, virtual: true, redact: true
     field :password_confirmation, :string, virtual: true, redact: true
     field :password_hash, :string, redact: true
@@ -18,7 +19,7 @@ defmodule VteachPhx.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password, :password_confirmation, :password_hash, :role])
+    |> cast(attrs, [:email, :username, :password, :password_confirmation, :password_hash, :role])
     |> validate_required([:email, :password, :password_confirmation, :role])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))

@@ -8,7 +8,7 @@ defmodule VteachPhx.Accounts.Session do
         {:ok, user}
       else
         _error ->
-            {:error, "Authentication failed"}
+            {:error, :invalid_credentials}
       end
   end
 
