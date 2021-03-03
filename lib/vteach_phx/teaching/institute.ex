@@ -20,7 +20,25 @@ defmodule VteachPhx.Teaching.Institute do
   @doc false
   def changeset(institute, attrs) do
     institute
-    |> cast(attrs, [:name, :address_line_1, :address_line_2, :district, :province, :phone, :fax, :email])
-    |> validate_required([:name, :address_line_1, :address_line_2, :district, :province, :phone, :fax, :email])
+    |> cast(attrs, [
+      :name,
+      :address_line_1,
+      :address_line_2,
+      :district,
+      :province,
+      :phone,
+      :fax,
+      :email
+    ])
+    |> validate_required([
+      :name,
+      :address_line_1,
+      :address_line_2,
+      :district,
+      :province,
+      :phone,
+      :fax,
+      :email
+    ])
   end
 end

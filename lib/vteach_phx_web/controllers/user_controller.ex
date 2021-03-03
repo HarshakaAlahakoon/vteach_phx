@@ -1,5 +1,4 @@
 defmodule VteachPhxWeb.UserController do
-
   use VteachPhxWeb, :controller
 
   alias VteachPhx.Accounts
@@ -54,13 +53,13 @@ defmodule VteachPhxWeb.UserController do
   # TODO: This function will be needed by other controllers/views, therefore, move this to a utility module.
   defp convert_changeset_errors(errors) do
     Enum.map(errors, fn {field, {message, values}} ->
-      message1 = List.foldl(values, message, fn (y, acc) ->
-        {key, value} = y
+      message1 =
+        List.foldl(values, message, fn y, acc ->
+          {key, value} = y
           String.replace(acc, "%{#{key}}", "#{value}", global: true)
-        end
-      )
-     {field, message1}
+        end)
+
+      {field, message1}
     end)
   end
-
 end
