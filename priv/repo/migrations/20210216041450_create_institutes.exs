@@ -15,6 +15,5 @@ defmodule VteachPhx.Repo.Migrations.CreateInstitutes do
 
       timestamps()
     end
-
   end
 end

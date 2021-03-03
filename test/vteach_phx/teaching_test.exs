@@ -6,9 +6,36 @@ defmodule VteachPhx.TeachingTest do
   describe "institutes" do
     alias VteachPhx.Teaching.Institute
 
-    @valid_attrs %{address_line_1: "some address_line_1", address_line_2: "some address_line_2", district: 42, email: "some email", fax: "some fax", name: "some name", phone: "some phone", province: 42}
-    @update_attrs %{address_line_1: "some updated address_line_1", address_line_2: "some updated address_line_2", district: 43, email: "some updated email", fax: "some updated fax", name: "some updated name", phone: "some updated phone", province: 43}
-    @invalid_attrs %{address_line_1: nil, address_line_2: nil, district: nil, email: nil, fax: nil, name: nil, phone: nil, province: nil}
+    @valid_attrs %{
+      address_line_1: "some address_line_1",
+      address_line_2: "some address_line_2",
+      district: 42,
+      email: "some email",
+      fax: "some fax",
+      name: "some name",
+      phone: "some phone",
+      province: 42
+    }
+    @update_attrs %{
+      address_line_1: "some updated address_line_1",
+      address_line_2: "some updated address_line_2",
+      district: 43,
+      email: "some updated email",
+      fax: "some updated fax",
+      name: "some updated name",
+      phone: "some updated phone",
+      province: 43
+    }
+    @invalid_attrs %{
+      address_line_1: nil,
+      address_line_2: nil,
+      district: nil,
+      email: nil,
+      fax: nil,
+      name: nil,
+      phone: nil,
+      province: nil
+    }
 
     def institute_fixture(attrs \\ %{}) do
       {:ok, institute} =
@@ -73,6 +100,78 @@ defmodule VteachPhx.TeachingTest do
     test "change_institute/1 returns a institute changeset" do
       institute = institute_fixture()
       assert %Ecto.Changeset{} = Teaching.change_institute(institute)
+    end
+  end
+
+  describe "user_institutes" do
+    alias VteachPhx.Teaching.UserInstitutes
+
+    @valid_attrs %{password: "some password", user_id: "some user_id"}
+    @update_attrs %{password: "some updated password", user_id: "some updated user_id"}
+    @invalid_attrs %{password: nil, user_id: nil}
+
+    def user_institutes_fixture(attrs \\ %{}) do
+      {:ok, user_institutes} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Teaching.create_user_institutes()
+
+      user_institutes
+    end
+
+    test "list_user_institutes/0 returns all user_institutes" do
+      user_institutes = user_institutes_fixture()
+      assert Teaching.list_user_institutes() == [user_institutes]
+    end
+
+    test "get_user_institutes!/1 returns the user_institutes with given id" do
+      user_institutes = user_institutes_fixture()
+      assert Teaching.get_user_institutes!(user_institutes.id) == user_institutes
+    end
+
+    test "create_user_institutes/1 with valid data creates a user_institutes" do
+      assert {:ok, %UserInstitutes{} = user_institutes} =
+               Teaching.create_user_institutes(@valid_attrs)
+
+      assert user_institutes.password == "some password"
+      assert user_institutes.user_id == "some user_id"
+    end
+
+    test "create_user_institutes/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Teaching.create_user_institutes(@invalid_attrs)
+    end
+
+    test "update_user_institutes/2 with valid data updates the user_institutes" do
+      user_institutes = user_institutes_fixture()
+
+      assert {:ok, %UserInstitutes{} = user_institutes} =
+               Teaching.update_user_institutes(user_institutes, @update_attrs)
+
+      assert user_institutes.password == "some updated password"
+      assert user_institutes.user_id == "some updated user_id"
+    end
+
+    test "update_user_institutes/2 with invalid data returns error changeset" do
+      user_institutes = user_institutes_fixture()
+
+      assert {:error, %Ecto.Changeset{}} =
+               Teaching.update_user_institutes(user_institutes, @invalid_attrs)
+
+      assert user_institutes == Teaching.get_user_institutes!(user_institutes.id)
+    end
+
+    test "delete_user_institutes/1 deletes the user_institutes" do
+      user_institutes = user_institutes_fixture()
+      assert {:ok, %UserInstitutes{}} = Teaching.delete_user_institutes(user_institutes)
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Teaching.get_user_institutes!(user_institutes.id)
+      end
+    end
+
+    test "change_user_institutes/1 returns a user_institutes changeset" do
+      user_institutes = user_institutes_fixture()
+      assert %Ecto.Changeset{} = Teaching.change_user_institutes(user_institutes)
     end
   end
 end

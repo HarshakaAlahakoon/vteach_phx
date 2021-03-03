@@ -17,6 +17,7 @@ defmodule VteachPhxWeb.Router do
   end
 
   scope "/api", VteachPhxWeb do
+    # pipe_through :api
     pipe_through [:api, :jwt_authentication]
 
     # resources "/users", UserController, except: [:new, :edit]
@@ -28,11 +29,18 @@ defmodule VteachPhxWeb.Router do
 
     # resources "/institutes", InstituteController, except: [:new, :edit]
     get "/institutes/index", InstituteController, :index
+    get "/institutes/my_institues", InstituteController, :my_institues
     get "/institutes/:id", InstituteController, :show
     post "/institutes/create", InstituteController, :create
     put "/institutes/update/:id", InstituteController, :update
     delete "/institutes/delete/:id", InstituteController, :delete
 
+    # resources "/user_institute", UserInstituteController, except: [:new, :edit]
+    get "/user_institute/index", UserInstituteController, :index
+    get "/user_institute/:id", UserInstituteController, :show
+    post "/user_institute/create", UserInstituteController, :create
+    put "/user_institute/update/:id", UserInstituteController, :update
+    delete "/user_institute/delete/:id", UserInstituteController, :delete
   end
 
   # Enables LiveDashboard only for development

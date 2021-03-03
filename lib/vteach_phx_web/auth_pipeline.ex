@@ -4,7 +4,7 @@ defmodule VteachPhxWeb.AuthPipeline do
     module: VteachPhx.Accounts.Guardian,
     error_handler: VteachPhx.AuthErrorHandler
 
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.EnsureAuthenticated
-    plug Guardian.Plug.LoadResource
+  plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+  plug Guardian.Plug.EnsureAuthenticated
+  plug Guardian.Plug.LoadResource
 end

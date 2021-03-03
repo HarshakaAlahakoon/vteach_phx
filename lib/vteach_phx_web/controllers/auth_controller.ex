@@ -1,5 +1,4 @@
 defmodule VteachPhxWeb.AuthController do
-
   use VteachPhxWeb, :controller
 
   alias VteachPhx.Accounts.Session
@@ -13,15 +12,17 @@ defmodule VteachPhxWeb.AuthController do
         additional_claims = %{
           username: user.username
         }
+
         {:ok, jwt, _claims} = Guardian.encode_and_sign(user, additional_claims)
         resp = %{:succes => true, :error_message => "SUCCESS", :token => jwt}
         conn |> render("sign_in_jwt.json", response: resp)
+
       {:error, :invalid_credentials} ->
         resp = %{:succes => false, :error_message => "Invalid username or password"}
+
         conn
         |> put_status(400)
         |> render("sign_in_failed.json", response: resp)
     end
   end
-
 end

@@ -11,7 +11,8 @@ defmodule VteachPhxWeb.InstituteView do
   end
 
   def render("institute.json", %{institute: institute}) do
-    %{id: institute.id,
+    %{
+      id: institute.id,
       name: institute.name,
       address_line_1: institute.address_line_1,
       address_line_2: institute.address_line_2,
@@ -19,6 +20,7 @@ defmodule VteachPhxWeb.InstituteView do
       province: institute.province,
       phone: institute.phone,
       fax: institute.fax,
-      email: institute.email}
+      email: institute.email
+    }
   end
 end

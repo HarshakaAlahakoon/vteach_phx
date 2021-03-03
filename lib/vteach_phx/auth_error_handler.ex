@@ -1,5 +1,4 @@
 defmodule VteachPhx.AuthErrorHandler do
-
   import Plug.Conn
 
   require Logger

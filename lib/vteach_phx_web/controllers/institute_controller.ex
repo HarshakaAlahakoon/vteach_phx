@@ -3,6 +3,8 @@ defmodule VteachPhxWeb.InstituteController do
 
   alias VteachPhx.Teaching
   alias VteachPhx.Teaching.Institute
+  alias VteachPhx.Accounts.Guardian
+  alias VteachPhx.Accounts.User
 
   action_fallback VteachPhxWeb.FallbackController
 
@@ -22,6 +24,15 @@ defmodule VteachPhxWeb.InstituteController do
 
   def show(conn, %{"id" => id}) do
     institute = Teaching.get_institute!(id)
+    render(conn, "show.json", institute: institute)
+  end
+
+  def my_institues(conn, _params) do
+    %User{id: user_id} = Guardian.Plug.current_resource(conn)
+    user_institutes = Teaching.get_user_institutes_by_user_id(user_id)
+    IO.inspect(user_institutes)
+    # render(conn, "index.json", user_institute: user_institute)
+    institute = Teaching.get_institute!("370fc893-e5cb-4800-bcc7-a3e3391e613a")
     render(conn, "show.json", institute: institute)
   end
 

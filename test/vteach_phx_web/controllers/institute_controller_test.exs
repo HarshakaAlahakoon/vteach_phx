@@ -24,7 +24,16 @@ defmodule VteachPhxWeb.InstituteControllerTest do
     phone: "some updated phone",
     province: 43
   }
-  @invalid_attrs %{address_line_1: nil, address_line_2: nil, district: nil, email: nil, fax: nil, name: nil, phone: nil, province: nil}
+  @invalid_attrs %{
+    address_line_1: nil,
+    address_line_2: nil,
+    district: nil,
+    email: nil,
+    fax: nil,
+    name: nil,
+    phone: nil,
+    province: nil
+  }
 
   def fixture(:institute) do
     {:ok, institute} = Teaching.create_institute(@create_attrs)
@@ -71,7 +80,10 @@ defmodule VteachPhxWeb.InstituteControllerTest do
   describe "update institute" do
     setup [:create_institute]
 
-    test "renders institute when data is valid", %{conn: conn, institute: %Institute{id: id} = institute} do
+    test "renders institute when data is valid", %{
+      conn: conn,
+      institute: %Institute{id: id} = institute
+    } do
       conn = put(conn, Routes.institute_path(conn, :update, institute), institute: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
