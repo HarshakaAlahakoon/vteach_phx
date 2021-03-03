@@ -2,8 +2,6 @@ defmodule VteachPhx.Teaching.Institute do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "institutes" do
     field :name, :string
     field :address_line_1, :string

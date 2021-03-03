@@ -136,6 +136,7 @@ defmodule VteachPhx.Teaching do
 
   def get_user_institutes_by_user_id(user_id) do
     IO.inspect(user_id)
+
     UserInstitute
     |> where(user_id: ^user_id)
     |> Repo.all()

@@ -2,8 +2,7 @@ defmodule VteachPhx.Repo.Migrations.CreateInstitutes do
   use Ecto.Migration
 
   def change do
-    create table(:institutes, primary_key: false) do
-      add :id, :binary_id, primary_key: true
+    create table(:institutes) do
       add :name, :string
       add :address_line_1, :string
       add :address_line_2, :string
@@ -15,5 +14,7 @@ defmodule VteachPhx.Repo.Migrations.CreateInstitutes do
 
       timestamps()
     end
+
+    create unique_index(:institutes, :name)
   end
 end

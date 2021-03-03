@@ -13,11 +13,9 @@ defmodule VteachPhxWeb.Router do
     pipe_through :api
 
     post "/auth/signin", AuthController, :sign_in
-    # post "/users/create", UserController, :create
   end
 
   scope "/api", VteachPhxWeb do
-    # pipe_through :api
     pipe_through [:api, :jwt_authentication]
 
     # resources "/users", UserController, except: [:new, :edit]
@@ -41,6 +39,12 @@ defmodule VteachPhxWeb.Router do
     post "/user_institute/create", UserInstituteController, :create
     put "/user_institute/update/:id", UserInstituteController, :update
     delete "/user_institute/delete/:id", UserInstituteController, :delete
+  end
+
+  scope "/graphiql" do
+    forward "/", Absinthe.Plug.GraphiQL,
+      schema: VteachPhxWeb.Schema,
+      interface: :simple
   end
 
   # Enables LiveDashboard only for development

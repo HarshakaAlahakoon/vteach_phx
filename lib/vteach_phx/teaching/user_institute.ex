@@ -1,12 +1,12 @@
 defmodule VteachPhx.Teaching.UserInstitute do
   use Ecto.Schema
   import Ecto.Changeset
+  alias VteachPhx.Accounts.User
+  alias VteachPhx.Teaching.Institute
 
-  @derive {Phoenix.Param, key: :user_id}
-  @primary_key false
-  schema "user_institute" do
-    field :user_id, :binary_id
-    field :institute_id, :binary_id
+  schema "user_institutes" do
+    belongs_to(:user, User)
+    belongs_to(:institute, Institute)
 
     timestamps()
   end

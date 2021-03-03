@@ -45,7 +45,10 @@ defmodule VteachPhx.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
       {:guardian, "~> 2.1.1"},
-      {:argon2_elixir, "~> 2.0"}
+      {:argon2_elixir, "~> 2.0"},
+      {:absinthe, "~> 1.6.3"},
+      {:absinthe_plug, "~> 1.5.5"},
+      {:absinthe_phoenix, "~> 2.0.1"}
     ]
   end
 

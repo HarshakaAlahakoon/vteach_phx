@@ -2,10 +2,8 @@ defmodule VteachPhx.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Comeonin
-  alias VteachPhx.Teaching.UserInstitute
+  alias VteachPhx.Teaching.{UserInstitute, Institute}
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "users" do
     field :email, :string, unique: true
     field :username, :string
@@ -13,7 +11,8 @@ defmodule VteachPhx.Accounts.User do
     field :password_confirmation, :string, virtual: true, redact: true
     field :password_hash, :string, redact: true
     field :role, :string
-    has_many(:user_institute, UserInstitute)
+    has_many(:user_institutes, UserInstitute)
+    many_to_many(:institutes, Institute, join_through: UserInstitute)
 
     timestamps()
   end
