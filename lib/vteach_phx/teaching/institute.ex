@@ -4,13 +4,13 @@ defmodule VteachPhx.Teaching.Institute do
 
   schema "institutes" do
     field :name, :string
-    field :address_line_1, :string
-    field :address_line_2, :string
-    field :district, :integer
-    field :province, :integer
-    field :phone, :string
-    field :fax, :string
-    field :email, :string
+    field :address_line_1, :string, default: ""
+    field :address_line_2, :string, default: ""
+    field :district, :integer, default: 0
+    field :province, :integer, default: 0
+    field :phone, :string, default: ""
+    field :fax, :string, default: ""
+    field :email, :string, default: ""
 
     timestamps()
   end
@@ -29,14 +29,14 @@ defmodule VteachPhx.Teaching.Institute do
       :email
     ])
     |> validate_required([
-      :name,
-      :address_line_1,
-      :address_line_2,
-      :district,
-      :province,
-      :phone,
-      :fax,
-      :email
+      :name
+      # :address_line_1,
+      # :address_line_2,
+      # :district,
+      # :province,
+      # :phone,
+      # :fax,
+      # :email
     ])
   end
 end

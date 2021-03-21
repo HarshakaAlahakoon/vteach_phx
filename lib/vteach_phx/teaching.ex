@@ -38,6 +38,8 @@ defmodule VteachPhx.Teaching do
   """
   def get_institute!(id), do: Repo.get!(Institute, id)
 
+  def get_institute(id), do: Repo.get(Institute, id)
+
   @doc """
   Creates a institute.
 
